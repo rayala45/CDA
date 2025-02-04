@@ -19,13 +19,18 @@ public class FacultyDaoImpl implements FacultyDao{
 	}
 
 	@Override
-	public void saveFaculty(Faculty faculty) {
-		repo.save(faculty);
+	public Faculty saveFaculty(Faculty faculty) {
+		return repo.save(faculty);
 	}
 
 	@Override
 	public List<Faculty> findAll() {
 		return repo.findAll();
+	}
+
+	@Override
+	public void delete(int id) {
+		repo.deleteById(id);
 	}
 
 }

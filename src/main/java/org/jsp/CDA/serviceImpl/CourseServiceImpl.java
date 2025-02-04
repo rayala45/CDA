@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.jsp.CDA.Dao.CourseDao;
+import org.jsp.CDA.Dao.DepartmentDao;
 import org.jsp.CDA.Dao.FacultyDao;
 import org.jsp.CDA.entities.Course;
+import org.jsp.CDA.entities.Department;
 import org.jsp.CDA.entities.Faculty;
 import org.jsp.CDA.exceptionclasses.DuplicateCourseException;
 import org.jsp.CDA.exceptionclasses.InvalidCourseIdException;
@@ -24,6 +26,9 @@ public class CourseServiceImpl implements CourseService {
 	
 	@Autowired
 	private FacultyDao fdao;
+	
+	@Autowired
+	private DepartmentDao ddao;
 
 	@Override
 	public ResponseEntity<?> saveCourse(Course course) {
@@ -60,13 +65,14 @@ public class CourseServiceImpl implements CourseService {
 		if(optional.isEmpty()) {
 			throw InvalidCourseIdException.builder().message("invalid id...").build(); 
 		}
-		Optional<Faculty> optional1=fdao.findById(cid);
+		Optional<Faculty> optional1=fdao.findById(fid);
 		if(optional.isEmpty()) {
 			throw InvalidFacultyIdException.builder().message("invalid id...").build(); 
 		}
 		Faculty faculty=optional1.get();
 		Course course=optional.get();
 		course.setFaculty(faculty);
+		course=dao.saveCourse(course);
 		return ResponseEntity.status(HttpStatus.OK).body(ResponseStructure.builder().status(HttpStatus.OK.value()).message("faculty assigned successfully...").body(course).build());
 		
 	}
@@ -97,6 +103,23 @@ public class CourseServiceImpl implements CourseService {
 		if(optional.isEmpty()) {
 			throw InvalidCourseIdException.builder().message("invalid id...").build(); 
 		}
+		course=dao.saveCourse(course);
+		return ResponseEntity.status(HttpStatus.OK).body(ResponseStructure.builder().status(HttpStatus.OK.value()).message("course updated successfully...").body(course).build());
+	}
+
+	@Override
+	public ResponseEntity<?> assignDepartmentToCourse(int cid, int did) {
+		Optional<Department> optional = ddao.findById(did);
+		if(optional.isEmpty()) {
+			throw new RuntimeException("Invalid department id...");
+		}
+		Optional<Course> optional2 = dao.findById(cid);
+		if(optional2.isEmpty()) {
+			throw new RuntimeException("Invalid course id...");
+		}
+		Department department = optional.get();
+		Course course = optional2.get();
+		course.setDepartment(department);
 		course=dao.saveCourse(course);
 		return ResponseEntity.status(HttpStatus.OK).body(ResponseStructure.builder().status(HttpStatus.OK.value()).message("course updated successfully...").body(course).build());
 	}

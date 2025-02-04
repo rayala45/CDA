@@ -15,4 +15,10 @@ public interface UserService {
 
 	ResponseEntity<?> delete(int id);
 
+	ResponseEntity<?> findUserByName(String name);
+
+	ResponseEntity<?> searchUserByName(String name);
+
+	ResponseEntity<?> searchUserByUsername(String username);
+
 }

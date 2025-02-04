@@ -39,4 +39,22 @@ public class UserDaoImpl implements UserDao {
 		repo.deleteById(id);
 	}
 
+	@Override
+	public List<User> findByName(String name) {
+		// TODO Auto-generated method stub
+		return repo.findByName(name);
+	}
+
+	@Override
+	public List<User> searchByName(String name) {
+		// TODO Auto-generated method stub
+		return repo.findAllByName(name);
+	}
+
+	@Override
+	public List<User> searchUserByUsername(String username) {
+		// TODO Auto-generated method stub
+		return repo.findAllByUsername(username);
+	}
+
 }

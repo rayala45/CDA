@@ -44,6 +44,11 @@ public class CourseController {
 		return service.assignFacultyToCourse(cid,fid);
 	}
 	
+	@PatchMapping("/department/{cid}/{did}")
+	public ResponseEntity<?> assignDepartmentToCourse(@PathVariable int cid,@PathVariable int did){
+		return service.assignDepartmentToCourse(cid,did);
+	}
+	
 	
 	@GetMapping("/title/{title}")
 	public ResponseEntity<?> findByname(@PathVariable String title){

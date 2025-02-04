@@ -9,9 +9,11 @@ public interface FacultyDao {
 
 	Optional<Faculty> findById(int cid);
 
-	void saveFaculty(Faculty faculty);
+	Faculty saveFaculty(Faculty faculty);
 
 	List<Faculty> findAll();
+
+	void delete(int id);
 
 
 

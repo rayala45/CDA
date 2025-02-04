@@ -45,6 +45,21 @@ public class UserController {
 		return service.delete(id);
 	}
 	
+	@GetMapping("/name/{name}")
+	public ResponseEntity<?> findUserByName(@PathVariable String name){
+		return service.findUserByName(name);
+	}
+	
+	@GetMapping("/searchName/{name}")
+	public ResponseEntity<?> searchUserByName(@PathVariable String name){
+		return service.searchUserByName(name);
+	}
+	
+	@GetMapping("/searchUsername/{username}")
+	public ResponseEntity<?> searchUserByUsername(@PathVariable String username){
+		return service.searchUserByUsername(username);
+	}
+	
 	
 
 }

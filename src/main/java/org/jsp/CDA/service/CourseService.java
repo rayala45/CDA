@@ -19,4 +19,6 @@ public interface CourseService {
 
 	ResponseEntity<?> update(Course course);
 
+	ResponseEntity<?> assignDepartmentToCourse(int cid, int did);
+
 }

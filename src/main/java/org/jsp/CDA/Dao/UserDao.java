@@ -19,4 +19,10 @@ public interface UserDao {
 
 	void delete(int id);
 
+	List<User> findByName(String name);
+
+	List<User> searchByName(String name);
+
+	List<User> searchUserByUsername(String username);
+
 }

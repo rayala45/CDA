@@ -22,7 +22,7 @@ public class Enrollment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@ManyToOne
-	private Student students;
+	private Student student;
 	@ManyToOne
 	private Course course;
 
