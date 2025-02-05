@@ -116,4 +116,28 @@ public class StudentServiceImpl implements StudentService {
 		return ResponseEntity.status(HttpStatus.OK).body(ResponseStructure.builder().status(HttpStatus.OK.value()).message("department assigned to the Student....").body(student2).build());
 	}
 
+	@Override
+	public ResponseEntity<?> updateYear(int uid, String year) {
+		Optional<Student> optional = dao.findById(uid);
+		if(optional.isEmpty()) {
+			throw new RuntimeException("invalid Id...");
+		}
+		Student student = optional.get();
+		student.setYear(year);
+		student=dao.saveStudent(student);
+		return ResponseEntity.status(HttpStatus.OK).body(ResponseStructure.builder().status(HttpStatus.OK.value()).message("year updated to the Student....").body(student).build());
+	}
+
+	@Override
+	public ResponseEntity<?> updatePhoto(int uid, String photo) {
+		Optional<Student> optional = dao.findById(uid);
+		if(optional.isEmpty()) {
+			throw new RuntimeException("invalid Id...");
+		}
+		Student student = optional.get();
+		student.setPhoto(photo);
+		student=dao.saveStudent(student);
+		return ResponseEntity.status(HttpStatus.OK).body(ResponseStructure.builder().status(HttpStatus.OK.value()).message("photo updated to the Student....").body(student).build());
+	}
+
 }

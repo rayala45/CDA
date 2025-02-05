@@ -19,4 +19,8 @@ public interface StudentService {
 
 	ResponseEntity<?> assignDepartmentToStudent(int uid, int did);
 
+	ResponseEntity<?> updateYear(int uid, String year);
+
+	ResponseEntity<?> updatePhoto(int uid, String photo);
+
 }

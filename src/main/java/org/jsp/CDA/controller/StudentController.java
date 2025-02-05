@@ -52,7 +52,14 @@ public class StudentController {
 	public ResponseEntity<?> assignDepartmentToStudent(@PathVariable int uid,@PathVariable int did){
 		return service.assignDepartmentToStudent(uid,did);
 	}
-	
+	@PatchMapping("/year/{uid}/{year}")
+	public ResponseEntity<?> updateYear(@PathVariable int uid,@PathVariable String year){
+		return service.updateYear(uid,year);
+	}
+	@PatchMapping("/photo/{uid}/{photo}")
+	public ResponseEntity<?> updatePhoto(@PathVariable int uid,@PathVariable String photo){
+		return service.updatePhoto(uid,photo);
+	}
 	
 
 }
