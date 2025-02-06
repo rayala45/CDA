@@ -10,4 +10,12 @@ public interface EnrollmentService {
 
 	ResponseEntity<?> findEnrollmentByFacultyId(int fid);
 
+	ResponseEntity<?> findAllEnrollmentsOfStudent(int sid);
+
+	ResponseEntity<?> findAllEnrollmentsOfCourse(int cid);
+
+	ResponseEntity<?> findAllEnrollments();
+
+	ResponseEntity<?> findEnrollmentById(int eid);
+
 }

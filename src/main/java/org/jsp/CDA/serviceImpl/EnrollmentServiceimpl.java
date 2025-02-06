@@ -62,4 +62,54 @@ public class EnrollmentServiceimpl implements EnrollmentService{
 	
 	}
 
+	@Override
+	public ResponseEntity<?> findAllEnrollmentsOfStudent(int sid) {
+		Optional<Student> optional = sdao.findById(sid);
+		if(optional.isEmpty()) {
+			throw new RuntimeException("invalid Student id...");
+		}
+		List<Enrollment> el=dao.findAllEnrollmentsOfStudent(sid);
+		if(el.isEmpty()) {
+			throw new RuntimeException("No enrollments in the dataBase...");
+		}
+//		List<Course> cl=new ArrayList<>();
+//		for(Enrollment e:el) {
+//			if(e.getStudent().getId()==sid) {
+//				cl.add(e.getCourse());
+//			}
+//		}
+		return ResponseEntity.status(HttpStatus.OK).body(ResponseStructure.builder().status(HttpStatus.OK.value()).message("all Enrollments of a given student..").body(el).build());
+	}
+
+	@Override
+	public ResponseEntity<?> findAllEnrollmentsOfCourse(int cid) {
+		Optional<Course> optional = cdao.findById(cid);
+		if(optional.isEmpty()) {
+			throw new RuntimeException("invalid Student id...");
+		}
+		List<Enrollment> el=dao.findAllEnrollmentsOfCourse(cid);
+		if(el.isEmpty()) {
+			throw new RuntimeException("No Enrollments for given course id");
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(ResponseStructure.builder().status(HttpStatus.OK.value()).message("all Enrollments of a given course..").body(el).build());
+	}
+
+	@Override
+	public ResponseEntity<?> findAllEnrollments() {
+		List<Enrollment> el = dao.findAllEnrollments();
+		if(el.isEmpty()) {
+			throw new RuntimeException("No Enrollments in the Database...");
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(ResponseStructure.builder().status(HttpStatus.OK.value()).message("all Enrollments found..").body(el).build());
+	}
+
+	@Override
+	public ResponseEntity<?> findEnrollmentById(int eid) {
+		Optional<Enrollment> optional=dao.findEnrollmentById(eid);
+		if(optional.isEmpty()) {
+			throw new RuntimeException("Invalid Enrollment id.....");
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(ResponseStructure.builder().status(HttpStatus.OK.value()).message("Enrollment found successfully with given id..").body(optional.get()).build());
+	}
+
 }

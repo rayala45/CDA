@@ -21,6 +21,16 @@ public class EnrollmentController {
 		return service.saveEnrollment(uid,cid);
 	}
 	
+	@GetMapping
+	public ResponseEntity<?> findAllEnrollments(){
+		return service.findAllEnrollments();
+	}
+	
+	@GetMapping("/{eid}")
+	public ResponseEntity<?> findEnrollmentById(@PathVariable int eid){
+		return service.findEnrollmentById(eid);
+	}
+	
 	@GetMapping("/user/{uid}")
 	public ResponseEntity<?> findEnrollmentByUserId(@PathVariable int uid){
 		return service.findEnrollmentByUserId(uid);
@@ -29,6 +39,16 @@ public class EnrollmentController {
 	@GetMapping("/faculty/{fid}")
 	public ResponseEntity<?> findEnrollmentByFacultyId(@PathVariable int fid){
 		return service.findEnrollmentByFacultyId(fid);
+	}
+	
+	@GetMapping("/studentEnrolls/{sid}")
+	public ResponseEntity<?> findAllEnrollmentsOfStudent(@PathVariable int sid){
+		return service.findAllEnrollmentsOfStudent(sid);
+	}
+	
+	@GetMapping("/courseEnrolls/{cid}")
+	public ResponseEntity<?> findAllEnrollmentsOfCourse(@PathVariable int cid){
+		return service.findAllEnrollmentsOfCourse(cid);
 	}
 
 }
