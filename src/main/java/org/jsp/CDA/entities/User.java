@@ -2,6 +2,7 @@ package org.jsp.CDA.entities;
 
 import org.jsp.CDA.util.Role;
 import org.jsp.CDA.util.Status;
+import org.springframework.beans.factory.annotation.Value;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,6 +27,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	//@Value("${name}")
 	@Column(nullable = false)
 	private String name;
 	@Column(unique = true,nullable = false)
